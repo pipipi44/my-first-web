@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的第一个 Antigravity 项目</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #E0F7FA;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+            transition: background-color 0.5s ease;
+        }
+
+        .container {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            max-width: 400px;
+            width: 90%;
+            transition: transform 0.2s;
+        }
+
+        .container:hover {
+            transform: translateY(-2px);
+        }
+
+        .message {
+            color: #1f2937;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.025em;
+            line-height: 1.3;
+        }
+
+        .counter-text {
+            color: #6b7280;
+            font-size: 1.1rem;
+            margin: 0 0 1.5rem 0;
+            font-weight: 500;
+        }
+
+        .btn {
+            background-color: #0288D1;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(2, 136, 209, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #0277BD;
+            box-shadow: 0 6px 8px -1px rgba(2, 136, 209, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 1rem;
+            color: #9ca3af;
+            font-size: 0.875rem;
+            width: 100%;
+            text-align: center;
+            pointer-events: none;
+            /* 防止遮挡点击 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="message">我的第一个 Antigravity 项目</h1>
+        <p class="counter-text" id="counter">点击次数：0</p>
+        <button class="btn" id="changeColorBtn">点击了解更多</button>
+        <div style="margin-top: 1.5rem;">
+            <a href="stats.html" style="color: #6b7280; text-decoration: none; font-size: 0.9rem;">查看成就统计 ></a>
+        </div>
+    </div>
+
+    <div class="footer">由 Antigravity 强力驱动</div>
+
+    <script>
+        const btn = document.getElementById('changeColorBtn');
+        const body = document.body;
+        const message = document.querySelector('.message');
+        const counter = document.getElementById('counter');
+
+        // 从 localStorage 读取次数，如果没有则默认为 0
+        let count = parseInt(localStorage.getItem('clickCount')) || 0;
+        let isAchievementUnlocked = false;
+
+        // 初始化页面显示
+        counter.textContent = `点击次数：${count}`;
+
+        // 检查加载时是否已经达成成就
+        if (count >= 10) {
+            isAchievementUnlocked = true;
+            message.textContent = '你太棒了！达成 10 次点击成就！';
+            body.style.backgroundColor = '#FFD700'; // 恢复金色背景
+        }
+
+        // 生成随机颜色的函数
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        btn.addEventListener('click', () => {
+            count++;
+            localStorage.setItem('clickCount', count); // 保存点击次数
+            counter.textContent = `点击次数：${count}`;
+
+            // 检查是否达成成就
+            if (count === 10) {
+                isAchievementUnlocked = true;
+                message.textContent = '你太棒了！达成 10 次点击成就！';
+                body.style.backgroundColor = '#FFD700'; // 锁定为金黄色
+
+                setTimeout(() => {
+                    alert('恭喜！你已解锁隐藏成就！');
+                }, 50);
+                return;
+            }
+
+            // 如果成就已解锁，仅增加计数，不再变色
+            if (count > 10 || isAchievementUnlocked) {
+                return;
+            }
+
+            // 正常逻辑：随机变色
+            const newColor = getRandomColor();
+            body.style.backgroundColor = newColor;
+
+            setTimeout(() => {
+                alert('颜色已切换！');
+            }, 50);
+        });
+    </script>
+</body>
+
+</html>

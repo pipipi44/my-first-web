@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成就统计 - Antigravity 项目</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f3f4f6;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #1f2937;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-box {
+            background-color: #f0f9ff;
+            border: 2px solid #e0f2fe;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #0288D1;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+            color: #1d4ed8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>成就统计</h1>
+        <div class="stat-box">
+            <span class="stat-label">你当前的总点击次数是</span>
+            <span class="stat-number" id="totalClicks">0</span>
+        </div>
+        <a href="index.html" class="back-link">← 返回首页</a>
+    </div>
+
+    <script>
+        // 从 localStorage 读取点击次数
+        const count = localStorage.getItem('clickCount') || 0;
+        document.getElementById('totalClicks').textContent = count;
+    </script>
+</body>
+
+</html>
