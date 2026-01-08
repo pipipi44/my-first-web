@@ -40,6 +40,57 @@
             margin-bottom: 2rem;
         }
 
+        /* 每日语录区域样式 */
+        .quote-container {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #fff;
+            border-left: 5px solid #0288D1;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .quote-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 动态背景颜色类 - 动画 (a) */
+        /* 动态背景颜色类 - 动画 (a) (莫兰迪蓝灰色系) */
+        .bg-type-a {
+            background-color: #EEF2F5;
+            /* 莫兰迪浅蓝灰 */
+            border-left-color: #8CA0B3;
+            /* 莫兰迪深蓝灰 */
+            color: #4A5869;
+        }
+
+        /* 动态背景颜色类 - 诗词 (i) (莫兰迪豆沙绿系) */
+        .bg-type-i {
+            background-color: #F0F4F0;
+            /* 莫兰迪浅豆绿 */
+            border-left-color: #9EB5A3;
+            /* 莫兰迪深豆绿 */
+            color: #526154;
+        }
+
+        .quote-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .quote-author {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
         .stat-number {
             font-size: 3rem;
             font-weight: 800;
@@ -73,18 +124,74 @@
 <body>
     <div class="container">
         <h1>成就统计</h1>
+
+        <!-- 每日语录显示区域 -->
+        <div class="quote-container" id="dailyQuote">
+            <div class="quote-text">正在加载每日一言...</div>
+        </div>
+
         <div class="stat-box">
             <span class="stat-label">你当前的总点击次数是</span>
             <span class="stat-number" id="totalClicks">0</span>
         </div>
-        <a href="index.html" class="back-link">← 返回首页</a>
+
     </div>
 
     <script>
-        // 从 localStorage 读取点击次数
+        // 从 localStorage 读取点击次数以显示统计数据
         const count = localStorage.getItem('clickCount') || 0;
         document.getElementById('totalClicks').textContent = count;
+
+        /**
+         * 获取每日语录的异步函数
+         * 使用 v1.hitokoto.cn 的公开接口
+         */
+        async function fetchDailyQuote() {
+            try {
+                // 关键逻辑：发起网络请求获取语录数据
+                const response = await fetch('https://v1.hitokoto.cn/');
+
+                // 检查响应状态
+                if (!response.ok) {
+                    throw new Error('网络响应异常');
+                }
+
+                // 解析返回的 JSON 数据
+                const data = await response.json();
+
+                // 获取页面上的语录容器元素
+                const quoteContainer = document.getElementById('dailyQuote');
+
+                // 移除所有可能的动态类型类，确保状态重置
+                quoteContainer.classList.remove('bg-type-a', 'bg-type-i');
+
+                // 根据语录类型 (type) 添加对应的 CSS 类
+                // 'a': 动画, 'i': 诗词
+                if (data.type === 'a') {
+                    quoteContainer.classList.add('bg-type-a');
+                } else if (data.type === 'i') {
+                    quoteContainer.classList.add('bg-type-i');
+                }
+
+                // 关键逻辑：更新 DOM 结构，显示语录内容和出处
+                quoteContainer.innerHTML = `
+                    <div class="quote-text">"${data.hitokoto}"</div>
+                    <div class="quote-author">—— ${data.from}</div>
+                `;
+            } catch (error) {
+                // 异常处理：如果在获取或解析过程中出错，在控制台打印错误信息
+                console.error('获取每日语录失败:', error);
+
+                //并在界面上给予友好提示
+                document.getElementById('dailyQuote').innerHTML =
+                    '<div class="quote-text">加载语录失败，请刷新页面重试。</div>';
+            }
+        }
+
+        // 页面初始化：调用函数加载语录
+        fetchDailyQuote();
     </script>
+    <script src="nav.js"></script>
 </body>
 
 </html>
