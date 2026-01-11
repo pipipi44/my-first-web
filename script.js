@@ -36,11 +36,11 @@ const Themes = {
 // === 3. I18N Dictionary (多语言字典) ===
 const I18nData = {
     zh: {
-        pageTitle: "我的第一个 Antigravity 项目",
+        pageTitle: "MindAnchor - 心灵之锚",
         navHome: "首页",
         navStats: "成就统计",
-        intro: "你好，我是正在使用 Antigravity 学习的前端开发者。",
-        welcomeMessage: "我的第一个 Antigravity 项目",
+        intro: "你好，我是 MindAnchor 的创造者。",
+        welcomeMessage: "欢迎来到 MindAnchor",
         clickCount: "点击次数：",
         btnClick: "点击了解更多",
         moodTitle: "心情记事本",
@@ -49,7 +49,7 @@ const I18nData = {
         btnExport: "导出日记",
         footerDisclaimerLabel: "免责声明：",
         footerPrivacyContent: "本应用仅用于个人心情记录，您的数据存储在浏览器本地。",
-        footerCopyright: "© 2026 由 Antigravity 创作。",
+        footerCopyright: "Crafted with ❤️ by Antigravity | MindAnchor v1.0",
         poweredBy: "由 Antigravity 强力驱动",
         placeholder: "写下此刻的心情...",
         confirmClear: "确定要删除所有心情记录吗？",
@@ -70,11 +70,11 @@ const I18nData = {
         greetingNight: "还没睡吗？夜猫子！🦉"
     },
     en: {
-        pageTitle: "My First Antigravity Project",
+        pageTitle: "MindAnchor - Digital Garden",
         navHome: "Home",
         navStats: "Statistics",
-        intro: "Hello, I am a future developer learning with Antigravity.",
-        welcomeMessage: "My First Antigravity Project",
+        intro: "Hello, I am the creator of MindAnchor.",
+        welcomeMessage: "Welcome to MindAnchor",
         clickCount: "Click Count: ",
         btnClick: "Click to Learn More",
         moodTitle: "Mood Notepad",
@@ -83,7 +83,7 @@ const I18nData = {
         btnExport: "Export Diary",
         footerDisclaimerLabel: "Disclaimer:",
         footerPrivacyContent: "This app is for personal mood tracking only. Your data is stored locally in your browser.",
-        footerCopyright: "© 2026 Created by Antigravity.",
+        footerCopyright: "Crafted with ❤️ by Antigravity | MindAnchor v1.0",
         poweredBy: "Powered by Antigravity",
         placeholder: "Write down your mood...",
         confirmClear: "Are you sure you want to delete all mood records?",

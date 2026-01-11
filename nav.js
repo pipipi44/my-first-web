@@ -48,6 +48,7 @@ window.initNav = function () {
 
     // 构建导航内容
     nav.innerHTML = `
+        <div style="font-weight:bold; font-size:1.2rem; color:var(--accent-color); margin-right:auto; padding-left:2rem;">⚓ MindAnchor</div>
         <a href="index.html" style="${linkStyle}" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='var(--text-muted)'" data-i18n="navHome">首页</a>
         <a href="stats.html" style="${linkStyle}" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='var(--text-muted)'" data-i18n="navStats">成就统计</a>
     `;
