@@ -51,6 +51,54 @@ body {
     }
 }
 
+/* === Loader (开屏动画) === */
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 使用 var(--glass-bg) 也可以，但为了遮挡效果更好，可以用半透明白/黑 */
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    /* 强磨砂效果 */
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 9999;
+    /* 确保在最顶层 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-out, visibility 0.5s;
+}
+
+#loader-wrapper.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    /* 彻底隐藏，不占位 */
+    pointer-events: none;
+    /* 确保鼠标事件穿透 */
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid var(--accent-color);
+    /* 顶部颜色，形成旋转感 */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 /* Flex 布局撑开 main 区域 */
 .main-content {
     flex: 1;
@@ -493,6 +541,44 @@ body {
 .timeline-content:hover {
     transform: translateX(5px);
     background: rgba(255, 255, 255, 0.8);
+}
+
+/* === Privacy Protection (Privacy Blur) === */
+/* 默认模糊内容 */
+.timeline-content .timeline-date,
+.timeline-content .timeline-text,
+.timeline-content .delete-item-btn {
+    filter: blur(8px);
+    transition: filter 0.3s ease;
+}
+
+/* 悬停时清除模糊 */
+.timeline-content:hover .timeline-date,
+.timeline-content:hover .timeline-text,
+.timeline-content:hover .delete-item-btn {
+    filter: blur(0);
+}
+
+/* 提示遮罩层 */
+.timeline-content::after {
+    content: "👁️ Hover to view";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    pointer-events: none;
+    /* 允许鼠标穿透，不影响 hover 判定 */
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* 悬停时隐藏提示 */
+.timeline-content:hover::after {
+    opacity: 0;
 }
 
 /* 删除按钮样式 */

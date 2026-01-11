@@ -62,7 +62,12 @@ const I18nData = {
         moodBalanceTitle: "情绪平衡指数",
         statusPositive: "元气满满!",
         statusNegative: "需要休息...",
-        statusNeutral: "平静如水"
+        statusNeutral: "平静如水",
+        // Dynamic Greetings
+        greetingMorning: "早上好，探索者！☀️",
+        greetingAfternoon: "下午好，创造者！☕",
+        greetingEvening: "晚上好，追梦人！🌙",
+        greetingNight: "还没睡吗？夜猫子！🦉"
     },
     en: {
         pageTitle: "My First Antigravity Project",
@@ -91,7 +96,12 @@ const I18nData = {
         moodBalanceTitle: "Mood Balance",
         statusPositive: "Full of Energy!",
         statusNegative: "Need a Break...",
-        statusNeutral: "Calm & Neutral"
+        statusNeutral: "Calm & Neutral",
+        // Dynamic Greetings
+        greetingMorning: "Good morning, Explorer! ☀️",
+        greetingAfternoon: "Good afternoon, Creator! ☕",
+        greetingEvening: "Good evening, Dreamer! 🌙",
+        greetingNight: "Still awake, Night Owl? 🦉"
     }
 };
 
@@ -115,6 +125,14 @@ const App = {
 
         // 3. Global Interactions
         this.bindGlobalEvents();
+
+        // 4. Dismiss Loader (模拟加载耗时)
+        setTimeout(() => {
+            const loader = document.getElementById('loader-wrapper');
+            if (loader) {
+                loader.classList.add('fade-out');
+            }
+        }, 1500); // 1.5s delay
 
         console.log("✅ App initialized successfully.");
     },
@@ -405,10 +423,17 @@ const App = {
             const lang = AppState.lang;
             const dict = I18nData[lang];
 
+            // 1. Standard text update
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const k = el.getAttribute('data-i18n');
                 if (dict[k]) el.textContent = dict[k];
             });
+
+            // 2. Dynamic Greeting Override
+            const greetingEl = document.getElementById('mainGreeting');
+            if (greetingEl) {
+                greetingEl.textContent = this.getDynamicGreeting();
+            }
 
             // Extras
             const input = document.getElementById('moodInput');
@@ -419,6 +444,24 @@ const App = {
 
             // Balance Label
             App.modules.dashboard.updateBalance();
+        },
+
+        getDynamicGreeting: function () {
+            const hours = new Date().getHours(); // 0-23
+            const lang = AppState.lang;
+            let key = 'greetingMorning';
+
+            if (hours >= 5 && hours < 12) {
+                key = 'greetingMorning';
+            } else if (hours >= 12 && hours < 18) {
+                key = 'greetingAfternoon';
+            } else if (hours >= 18) {
+                key = 'greetingEvening';
+            } else {
+                key = 'greetingNight'; // 0:00 - 4:59
+            }
+
+            return I18nData[lang][key];
         }
     },
 
