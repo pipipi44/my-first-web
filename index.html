@@ -4,19 +4,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的第一个 Antigravity 项目</title>
+    <title data-i18n="pageTitle">我的第一个 Antigravity 项目</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="message">我的第一个 Antigravity 项目</h1>
-        <p class="counter-text" id="counter">点击次数：0</p>
-        <button class="btn" id="changeColorBtn">点击了解更多</button>
+    <!-- Main 内容区，用于 Sticky Footer -->
+    <main class="main-content">
+        <div class="container glass-effect">
+            <!-- Mood Dashboard -->
+            <div id="dashboard-section" class="dashboard-grid">
+                <div class="stat-card">
+                    <h3 data-i18n="statTotal">Total</h3>
+                    <p id="statTotalValue" class="stat-value">-</p>
+                </div>
+                <div class="stat-card">
+                    <h3 data-i18n="statWeek">This Week</h3>
+                    <p id="statWeekValue" class="stat-value">-</p>
+                </div>
+                <div class="stat-card">
+                    <h3 data-i18n="statLast">Last Active</h3>
+                    <p id="statLastValue" class="stat-value small-text">-</p>
+                </div>
 
-    </div>
+                <!-- Mood Balance Bar (New) -->
+                <div class="mood-balance-container">
+                    <div class="balance-header">
+                        <span class="balance-label negative">Negative</span>
+                        <span class="balance-title" data-i18n="moodBalanceTitle">Mood Balance</span>
+                        <span class="balance-label positive">Positive</span>
+                    </div>
+                    <div class="progress-track">
+                        <div id="moodProgressBar" class="progress-fill" style="width: 50%"></div>
+                    </div>
+                    <div id="moodBalanceText" class="balance-status">Neutral</div>
+                </div>
+            </div>
 
-    <div class="footer">由 Antigravity 强力驱动</div>
+            <!-- 关于我 (Typewriter) -->
+            <div class="about-section">
+                <p id="introText" class="typewriter" data-i18n="intro"></p>
+            </div>
+
+            <!-- 原有计数器部分 -->
+            <h1 class="message" data-i18n="welcomeMessage">我的第一个 Antigravity 项目</h1>
+            <p class="counter-text" id="counter" data-i18n="clickCount">点击次数：0</p>
+            <button class="btn" id="changeColorBtn" data-i18n="btnClick">点击了解更多</button>
+
+            <!-- 心情记事本 (Mood Notepad) -->
+            <div class="mood-section">
+                <h2 data-i18n="moodTitle" style="color:#4b5563; margin-top:2rem;">心情记事本</h2>
+
+                <div class="input-group">
+                    <input type="text" id="moodInput" placeholder="写下此刻的心情..." class="glass-input">
+                    <button id="saveMoodBtn" class="btn" data-i18n="btnRecord">记录</button>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="clearMoodsBtn" class="btn btn-danger" data-i18n="btnClear">清空所有</button>
+                    <button id="exportMoodBtn" class="btn btn-success" data-i18n="btnExport">导出日记</button>
+                </div>
+
+                <!-- 时间轴列表 -->
+                <div class="timeline-container">
+                    <ul id="timelineList">
+                        <!-- JS 动态生成 -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>
+                <strong data-i18n="footerDisclaimerLabel">Disclaimer:</strong>
+                <span data-i18n="footerPrivacyContent">This app is for personal mood tracking only. Your data is stored
+                    locally in your browser.</span>
+            </p>
+            <p class="copyright" data-i18n="footerCopyright">© 2026 Created by Antigravity.</p>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" title="Back to Top">↑</button>
 
     <!-- 引用外部脚本 -->
     <script src="nav.js"></script>

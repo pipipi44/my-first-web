@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的第一个 Antigravity 项目</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="message">我的第一个 Antigravity 项目</h1>
+        <p class="counter-text" id="counter">点击次数：0</p>
+        <button class="btn" id="changeColorBtn">点击了解更多</button>
+
+    </div>
+
+    <div class="footer">由 Antigravity 强力驱动</div>
+
+    <!-- 引用外部脚本 -->
+    <script src="nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
