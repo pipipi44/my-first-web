@@ -1,0 +1,20 @@
+{
+  "name": "mind-anchor",
+  "version": "1.0.0",
+  "description": "MindAnchor - Digital Garden: A personal mood tracking and digital garden web application.",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mood-tracker",
+    "digital-garden",
+    "web",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "Antigravity",
+  "license": "ISC"
+}
